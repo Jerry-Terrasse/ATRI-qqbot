@@ -3,3 +3,5 @@ __pycache__/
 /bots/
 /config/Console/AutoLogin.yml
 /cfg.json
+
+*.log
