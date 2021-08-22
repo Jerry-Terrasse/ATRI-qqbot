@@ -38,7 +38,7 @@ from model.akinatorG import akinatorGame
 class GroupEvent:
     bcc: Broadcast
     app: GraiaMiraiApplication
-    chat : ChatBot
+    chat = ChatBot()
     setu = acgTools.SetuTime()
     acgSearch = acgTools.AcgSearch()
     animeSearch = acgTools.AnimeSearch()
@@ -53,7 +53,7 @@ class GroupEvent:
     Akinator = atri.Akinator["enable"]
     chatBot = atri.chatBot['enable']
 
-    quote = any([conversation['quote'], chatBot['quote']])
+    quote = any([conversation['quote'], chatBot])
 
     onlyGroup = atri.onlyGroup['list'] if atri.onlyGroup['enable'] else False
     shieldGroup = atri.shieldGroup['list'] if atri.shieldGroup['enable'] else []
