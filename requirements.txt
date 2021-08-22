@@ -5,3 +5,4 @@ pillow
 aiohttp
 saucenao_api
 numpy
+akinator.py
