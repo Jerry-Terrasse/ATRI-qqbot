@@ -1,5 +1,6 @@
 __pycache__/
 
+/data/
 /bots/
 /config/Console/AutoLogin.yml
 /cfg.json
