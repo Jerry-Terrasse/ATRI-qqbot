@@ -164,7 +164,7 @@ class GroupEvent:
             if res[0]:
                 chain = MessageChain.create(
                     [
-                        Image.fromNetworkAddress(res[1])
+                        Image.fromLocalFile(res[1])
                     ]
                 )
             else:
