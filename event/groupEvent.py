@@ -31,7 +31,7 @@ from graia.application.entry import (
 from graia.broadcast import Broadcast
 from model.chatBot import ChatBot
 from engine import atri
-from model import sticker, acgTools
+from model import sticker, acgTools, news
 from model.akinatorG import akinatorGame
 
 
@@ -42,6 +42,7 @@ class GroupEvent:
     setu = acgTools.SetuTime()
     acgSearch = acgTools.AcgSearch()
     animeSearch = acgTools.AnimeSearch()
+    news = news.News()
     with open('interaction.json', 'r') as c:
         conversation = json.load(c)
     conversation = conversation['conversation']
@@ -156,6 +157,23 @@ class GroupEvent:
                         Plain(searchResultSet)
                     ]
                 )
+        
+        if GroupEvent.news.enable and messagePlain in GroupEvent.news.cmd:
+            res = await GroupEvent.news.get_news() # (status: bool, url: str)
+            print('!!!!!', res)
+            if res[0]:
+                chain = MessageChain.create(
+                    [
+                        Image.fromNetworkAddress(res[1])
+                    ]
+                )
+            else:
+                chain = MessageChain.create(
+                    [
+                        Plain(res[1])
+                    ]
+                )
+
         if message.asDisplay() in ['吃啥', '恰啥', '吃什么', '今晚吃啥', '今晚吃什么', '等会吃什么', '等会吃啥', '来点吃的']:
             chain = MessageChain.create([Image.fromLocalFile('img/sticker/food/%d.png' % random.randrange(13))])
 
