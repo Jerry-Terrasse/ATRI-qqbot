@@ -52,6 +52,7 @@ class GroupEvent:
     StickerPath = atri.sticker['path']
     Akinator = atri.Akinator["enable"]
     chatBot = atri.chatBot['enable']
+    news = atri.news['enable']
 
     quote = any([conversation['quote'], chatBot])
 
