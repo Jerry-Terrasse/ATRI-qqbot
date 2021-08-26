@@ -52,6 +52,7 @@ class ATRI:
         self.Akinator = self.cfg['Akinator']
         self.chatBot = self.cfg['chatBot']
         self.news = self.cfg['news']
+        self.setuO = self.cfg['setuOnline']
 
         self.setuPath = self.cfg['setu']['path'] if self.cfg['setu']['enable'] else None
         self.stickerPath = self.cfg['sticker']['path'] if self.cfg['sticker']['enable'] else None

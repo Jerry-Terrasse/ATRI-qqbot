@@ -15,8 +15,31 @@ from typing.io import IO
 from engine import atri
 
 setu = atri.setu
+setuO = atri.setuO
 search = atri.illustrationSearch
 
+
+class SetuOnline:
+    enable = setuO['enable']
+    cmd = setuO['command']
+    BASE = 'https://api.lolicon.app/setu/v2?'
+    size = setuO['size']
+
+    @classmethod
+    async def get_url(cls):
+        async with aiohttp.ClientSession() as client:
+            response = await client.get(''.join([cls.BASE, 'size=', cls.size]))
+            response.raise_for_status()
+            data = await response.json()
+            return data['data'][0]['urls'][cls.size]
+
+    @classmethod
+    async def get_setu(cls):
+        try:
+            url = await cls.get_url()
+            return (True, url)
+        except Exception as e:
+            return (False, str(e))
 
 class SetuTime:
     path = setu['path']

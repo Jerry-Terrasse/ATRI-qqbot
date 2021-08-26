@@ -40,6 +40,7 @@ class GroupEvent:
     app: GraiaMiraiApplication
     chat = ChatBot()
     setu = acgTools.SetuTime()
+    setuOnline = acgTools.SetuOnline()
     acgSearch = acgTools.AcgSearch()
     animeSearch = acgTools.AnimeSearch()
     news = news.News()
@@ -115,6 +116,7 @@ class GroupEvent:
                 chain = MessageChain.create(
                     [Image.fromLocalFile(GroupEvent.StickerPath + patten)]
                 )
+
         if GroupEvent.setu.enable and messagePlain in GroupEvent.setu.cmd:
             setu = GroupEvent.setu.randomSetu()
             chain = MessageChain.create(
@@ -124,6 +126,22 @@ class GroupEvent:
                     Image.fromLocalFile(setu).asFlash()
                 ]
             )
+        if GroupEvent.setuOnline.enable and messagePlain in GroupEvent.setuOnline.cmd:
+            res = await GroupEvent.setuOnline.get_setu() # (status: bool, url: str)
+            print('!!!!!!', res)
+            if res[0]:
+                chain = MessageChain.create(
+                    [
+                        Image.fromNetworkAddress(res[1]).asFlash()
+                    ]
+                )
+            else:
+                chain = MessageChain.create(
+                    [
+                        Plain(res[1])
+                    ]
+                )
+
         if GroupEvent.acgSearch.enable and messagePlain in GroupEvent.acgSearch.cmd:
             if not message.has(Image):
                 chain = MessageChain.create(
